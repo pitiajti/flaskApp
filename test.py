@@ -6,6 +6,10 @@ app = Flask(__name__)
 @app.route("/")
 def index():
     return "Index page"
+
+@app.route("/piti")
+def piti():
+	return "hello, mr piti!"
     
 @app.route("/hello")
 def hello():
@@ -24,7 +28,7 @@ def hello():
 </html> 
 """
 
-@app.route('/user/<username>')
+@app.route('/user/<username>')æ
 def show_user_profile(username):
 	# show the user profile for that user
 	return f'User {escape(username)}'
