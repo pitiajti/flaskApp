@@ -1,15 +1,31 @@
-from flask import Flask
+from flask import Flask, render_template, url_for
 from markupsafe import escape
 
 app = Flask(__name__)
 
-@app.route("/")
-def index():
-    return "Index page"
+posts = [
+	{
+		'author': 'Piti Bielicki',
+		'title': 'Blog post 1',
+		'content': 'First post content',
+		'date_posted': 'April 23, 2023',
+	},
+	{
+		'author': 'Ewka Bielicka',
+		'title': 'Blog post 2',
+		'content': 'Second post content',
+		'date_posted': 'April 27, 2023',
+	},
+]
 
-@app.route("/piti")
-def piti():
-	return "hello, mr piti!"
+@app.route("/")
+@app.route("/home")
+def home():
+    return render_template('home.html', posts=posts)
+
+@app.route("/about")
+def about():
+	return render_template('about.html', title='About')
     
 @app.route("/hello")
 def hello():
@@ -28,7 +44,7 @@ def hello():
 </html> 
 """
 
-@app.route('/user/<username>')æ
+@app.route('/user/<username>')
 def show_user_profile(username):
 	# show the user profile for that user
 	return f'User {escape(username)}'
